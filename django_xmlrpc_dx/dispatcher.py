@@ -1,4 +1,4 @@
-"""Offers a simple XML-RPC dispatcher for django_xmlrpc
+"""Offers a simple XML-RPC dispatcher for django_xmlrpc_dx
 
 Author::
     Graham Binns

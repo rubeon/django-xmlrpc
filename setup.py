@@ -3,21 +3,21 @@ import os
 from setuptools import find_packages
 from setuptools import setup
 
-import django_xmlrpc
+import django_xmlrpc_dx
 
 
-setup(name='django-xmlrpc',
-      version=django_xmlrpc.__version__,
+setup(name='django-xmlrpc-dx',
+      version=django_xmlrpc_dx.__version__,
 
       description='XML-RPC Server App for the Django framework.',
       long_description=open(os.path.join('README.rst')).read(),
       keywords='django, service, xmlrpc',
 
-      author='Graham Binns',
-      author_email='graham.binns@gmail.com',
-      maintainer='Fantomas42',
-      maintainer_email='fantomas42@gmail.com',
-      url='https://github.com/Fantomas42/django-xmlrpc',
+      author='rubeon',
+      author_email='rubeon@gmail.com',
+      maintainer='rubeon',
+      maintainer_email='rubeon@gmail.com',
+      url='https://github.com/rubeon/django-xmlrpc',
 
       packages=find_packages(),
       classifiers=[

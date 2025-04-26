@@ -1,6 +1,8 @@
-"""apps module for the django_xmlrpc package
+"""Uses SimpleXMLRPCServer's SimpleXMLRPCDispatcher to serve XML-RPC requests
 
 Authors::
+    Graham Binns
+    Reza Mohammadi
     Julien Fache
 
 Credit must go to Brendan W. McAdams <brendan.mcadams@thewintergrp.com>, who
@@ -37,14 +39,51 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-from django.apps import AppConfig
+from logging import getLogger
+
+from django.http import HttpResponse
+from django.http import HttpResponseServerError
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
+from django_xmlrpc_dx.dispatcher import xmlrpc_dispatcher
 
 
-class XMLRPCConfig(AppConfig):
-    name = 'django_xmlrpc'
-    label = 'xmlrpc'
-    verbose_name = 'XMRPC'
+logger = getLogger('xmlrpc.views')
 
-    def ready(self):
-        from django_xmlrpc.registry import register_xmlrpc_methods
-        register_xmlrpc_methods()
+
+@csrf_exempt
+def handle_xmlrpc(request):
+    """Handles XML-RPC requests. All XML-RPC calls should be forwarded here
+
+    request
+        The HttpRequest object that carries the XML-RPC call. If this is a
+        GET request, nothing will happen (we only accept POST requests)
+    """
+    if request.method == 'POST':
+        logger.info(request.body)
+        try:
+            response = HttpResponse(content_type='text/xml')
+            response.write(
+                xmlrpc_dispatcher._marshaled_dispatch(request.body))
+            logger.debug(response)
+            return response
+        except:
+            return HttpResponseServerError()
+    else:
+        methods = xmlrpc_dispatcher.system_listMethods()
+        method_list = []
+
+        for method in methods:
+            sig_ = xmlrpc_dispatcher.system_methodSignature(method)
+            sig = {
+                'returns': sig_[0],
+                'args': ', '.join(sig_[1:]),
+            }
+
+            # This just reads your docblock, so fill it in!
+            method_help = xmlrpc_dispatcher.system_methodHelp(method)
+
+            method_list.append((method, sig, method_help))
+
+        return render(request, 'xmlrpc_get.html', {'methods': method_list})

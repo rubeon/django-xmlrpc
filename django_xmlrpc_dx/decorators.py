@@ -1,4 +1,4 @@
-"""Offers decorators to make the use of django_xmlrpc a great deal simpler
+"""Offers decorators to make the use of django_xmlrpc_dx a great deal simpler
 
 Authors::
     Graham Binns,

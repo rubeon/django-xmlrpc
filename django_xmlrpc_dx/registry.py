@@ -1,4 +1,4 @@
-"""registry module for the django_xmlrpc package
+"""registry module for the django_xmlrpc_dx package
 
 Authors::
     Julien Fache
@@ -47,7 +47,7 @@ from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
-from django_xmlrpc.dispatcher import xmlrpc_dispatcher
+from django_xmlrpc_dx.dispatcher import xmlrpc_dispatcher
 
 logger = getLogger('xmlrpc.registry')
 

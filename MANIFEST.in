@@ -1,3 +1,3 @@
 include README.rst
-recursive-include django_xmlrpc/locale *
-recursive-include django_xmlrpc/templates *.html
+recursive-include django_xmlrpc_dx/locale *
+recursive-include django_xmlrpc_dx/templates *.html

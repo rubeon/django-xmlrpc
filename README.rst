@@ -1,3 +1,25 @@
+=========
+ATTENTION
+=========
+
+This Repository is a fork of @Fantomas42 's legendary Django-XMLRPC package.
+It fixes compatibility issues with current versions of Python and Django
+that have unfortunately not been addressed in the upstream repo.
+
+Installation
+============
+
+From PyPi:
+
+  $ pip install django-xmlrpc-dx
+
+From source:
+
+  $ python setup.py install
+
+Below is the intact README from the upstream.  Some information may no
+longer be accurate.
+
 ==============
 Django XML-RPC
 ==============
