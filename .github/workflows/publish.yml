@@ -1,5 +1,9 @@
 jobs:
   pypi-publish:
+    on:
+    push:
+      tags:
+        - v**
     name: upload release to PyPI
     runs-on: ubuntu-latest
     # Specifying a GitHub environment is optional, but strongly encouraged
