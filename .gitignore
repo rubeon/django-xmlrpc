@@ -13,4 +13,4 @@ downloads
 src_eggs
 develop-eggs
 .installed.cfg
-django_xmlrpc.egg-info/
+django_xmlrpc_dx.egg-info/
